@@ -1,0 +1,22 @@
+repo_name,commit_hash,message,date,author,files_changed_count,is_bugfix
+pydriller,d763b96da09aca61322bfe95b3490d4fa03d7494,add test for modification. using fixture of pytest in repository mining tests,2018-03-29 11:46:59+02:00,ishepard,3,True
+pydriller,9893e66bda467488fc27694d8dc64cde34bc2873,fixing bug of memory consumption,2018-03-30 09:11:56+02:00,ishepard,3,True
+pydriller,bbc5ea4097bf4c4186f6516156017520f9146380,fix requirements,2018-03-30 09:14:17+02:00,ishepard,1,True
+pydriller,7677ce1c682d36ad2436f488889c83c8e3cb01fe,fix bug of timezones,2018-03-30 14:06:06+02:00,ishepard,3,True
+pydriller,3d584c4187685b696758c672d83d936122d56a98,fixing memory,2018-03-30 15:08:58+02:00,ishepard,1,True
+pydriller,2efde2c75a2ff55ff401868b2f4eb6c8c993d4b3,small fix,2018-03-30 22:03:30+02:00,ishepard,6,True
+flask,3d719f35f5c1ee4ce3dc01fb2167ef49c0180cf6,"Added docs, fixed some bugs I introduced last commit",2010-04-10 15:49:15+02:00,Armin Ronacher,13,True
+flask,8e9bd5f009bb8756a2a7d76a4b792323eeee49d6,Fixed a typo,2010-04-10 16:01:14+02:00,Armin Ronacher,1,True
+flask,1fff3e598126a084348ec2c112fdd3bc6b9a1ee0,Fixed a doc display bug and setup.py workaround for dev version.,2010-04-11 02:42:13+02:00,Armin Ronacher,3,True
+flask,574e81f9c8bbdc41958e1e7a7613633b091101f8,Fixed a bug in setup.py,2010-04-11 02:46:44+02:00,Armin Ronacher,2,True
+flask,2f5a4f8dbc832b0daebcd66ea8b3969589191fa7,Doc updates and typo fixes,2010-04-12 00:14:59+02:00,Armin Ronacher,4,True
+flask,51c9829a9cdfa2bf301431f686d7a404cc7c5083,Fixed couple of errors in docs.,2010-04-12 16:18:01+08:00,moraes,3,True
+flask,a01e8b49ca66608f0bd46134ff02deeb5724c799,Fixed a documentation error and implemented template context processors.,2010-04-12 19:52:18+02:00,Armin Ronacher,1,True
+flask,8009bd986940378bba1399dbfce90d03e441467b,Fixed the mod_wsgi docs. Thanks Graham,2010-04-14 02:17:55+02:00,Armin Ronacher,1,True
+flask,c4f5c2fb9afc1679c085500830bd53fab93ad885,Fixed a typo,2010-04-14 17:09:34+02:00,Armin Ronacher,1,True
+flask,40e0024d7b87150ed694829a5335bd2435962225,"Added screenshot of the debugger to Flask docs.  Flask now runs from the
+shell again.",2010-04-16 02:14:54+02:00,Armin Ronacher,3,True
+flask,7b5015010bc8c2a2d56c7c50b37e5b9facdad102,"Preserve the request context in debug mode.
+
+This makes it possible to access request information in the interactive
+debugger.  Closes #8.",2010-04-16 02:27:37+02:00,Armin Ronacher,1,True
