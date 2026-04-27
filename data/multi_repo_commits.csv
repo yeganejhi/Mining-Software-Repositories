@@ -1,0 +1,110 @@
+repo_name,commit_hash,message,date,author,files_changed_count
+pydriller,ab36bf45859a210b0eae14e17683f31d19eea041,first commit..starting with domain,2018-03-21 16:34:21+01:00,ishepard,12
+pydriller,fdf671856b260aca058e6595a96a7a0fba05454b,created git_repository and other important classes,2018-03-22 11:07:31+01:00,ishepard,13
+pydriller,90ca34ebfe69629cb7f186a1582fc38a73cc572e,git repo now has get_commit,2018-03-22 12:53:52+01:00,ishepard,2
+pydriller,71e053f61fc5d31b3e31eccd9c79df27c31279bf,"add modification, implemented files()",2018-03-26 13:13:27+02:00,ishepard,5
+pydriller,205f6fb09734667b0c1842fd3c317013640189ce,first visitor works!,2018-03-27 16:34:02+02:00,ishepard,4
+pydriller,f8b713a9f5e4620abbbc84f45493352fc046b5e0,improvements on git_repository,2018-03-27 17:43:12+02:00,ishepard,4
+pydriller,2437f7bb5659a342b8d74c169d175604170395ae,started some documentation,2018-03-28 11:29:24+02:00,ishepard,3
+pydriller,940989ef3146f03e4a856f04a90d1b8f5f954f15,ignoring test-repos. Uploading test-repos.zip,2018-03-28 11:31:08+02:00,ishepard,4
+pydriller,e74e3ed37c10153491d12aa372c2b209fc274597,better handling of dates in the test,2018-03-28 11:41:30+02:00,ishepard,1
+pydriller,0c26f403d2e80f1ba782094c065045b83500d48b,more documentation,2018-03-28 11:56:13+02:00,ishepard,1
+pydriller,d4eb3b23e1622f8c4c9f2abc6aec678180caf17d,added filters. new tests too,2018-03-28 14:30:18+02:00,ishepard,4
+pydriller,e7a002afc5995022336c46a3340e0077d77acb66,now it handles different branches,2018-03-28 15:50:25+02:00,ishepard,3
+pydriller,c950f102c01967b27ad02ac95fa7cd0a302e3698,moving from unittest to pytest,2018-03-28 16:44:25+02:00,ishepard,6
+pydriller,a19bbe9736463a39374082501dfc05842c667d90,created travis requirements,2018-03-28 16:50:58+02:00,ishepard,2
+pydriller,5490d2d14f0a4a38d2ad1898e1934d5d96d722f4,update travis file,2018-03-28 16:56:44+02:00,ishepard,2
+pydriller,4985da18f8eb39f3fa1bcce874af3013239ddfc3,moving from == to is,2018-03-28 17:05:39+02:00,ishepard,2
+pydriller,97138d69cda8c07a31419eae5760052ddb506c49,new test and small modifications,2018-03-29 10:21:09+02:00,ishepard,5
+pydriller,d763b96da09aca61322bfe95b3490d4fa03d7494,add test for modification. using fixture of pytest in repository mining tests,2018-03-29 11:46:59+02:00,ishepard,3
+pydriller,d0a43b9f9b9d6cdc2b30d111d0b5d24b79fc0bfc,more integration tests,2018-03-29 13:13:07+02:00,ishepard,6
+pydriller,a981d4e719be4cd7afcb2c17c0530905009c824f,now it creates a new branch when checking out. More tests too,2018-03-29 16:32:03+02:00,ishepard,10
+pydriller,464606bee3a26da30091b9892102d87f6c7bdfee,finish to replicate repodriller tests,2018-03-29 16:58:07+02:00,ishepard,5
+pydriller,4bb7eb0f69714caa3fd5963715c0f340e9f51de9,small,2018-03-29 17:02:33+02:00,ishepard,2
+pydriller,6deaecd443ab3250cbd109c0b39834fbd49e78a3,memory consumption test,2018-03-30 08:47:02+02:00,ishepard,2
+pydriller,9893e66bda467488fc27694d8dc64cde34bc2873,fixing bug of memory consumption,2018-03-30 09:11:56+02:00,ishepard,3
+pydriller,bbc5ea4097bf4c4186f6516156017520f9146380,fix requirements,2018-03-30 09:14:17+02:00,ishepard,1
+pydriller,7677ce1c682d36ad2436f488889c83c8e3cb01fe,fix bug of timezones,2018-03-30 14:06:06+02:00,ishepard,3
+pydriller,60e1875da57a5224ef1abd4a49856e2ff6022370,add print output on travis builds,2018-03-30 14:09:17+02:00,ishepard,1
+pydriller,17697a531a93b916ab94af0db1080b3652b34953,getting the phisycal memory and not virtual,2018-03-30 14:40:59+02:00,ishepard,2
+pydriller,3d584c4187685b696758c672d83d936122d56a98,fixing memory,2018-03-30 15:08:58+02:00,ishepard,1
+pydriller,1722bd1b0626ac3b206ffd93cd51106b57cbc53f,using logging,2018-03-30 17:51:46+02:00,ishepard,5
+pydriller,7d16c2446d628224398d89b357b42063205d2be3,small,2018-03-30 18:13:35+02:00,ishepard,1
+pydriller,2efde2c75a2ff55ff401868b2f4eb6c8c993d4b3,small fix,2018-03-30 22:03:30+02:00,ishepard,6
+pydriller,347ac56bfcfbb828330395043dc6adff1093720d,implemented commit filters,2018-03-31 12:01:15+02:00,ishepard,3
+pydriller,438c4167cb7206e88255407ed50b35d21f9619f9,test filters,2018-03-31 12:15:48+02:00,ishepard,4
+pydriller,482061a90b1fa35fc6dd017ca40df23d453067fb,upload new repos,2018-03-31 12:18:47+02:00,ishepard,1
+pydriller,98303548022c2d74a6723dc19bd5e50c2a10b570,importing logging everywhere,2018-04-03 08:53:49+02:00,ishepard,13
+pydriller,cd15ee0c99a9b1f77341849670e9aece3ca34251,pydriller now uses threads,2018-04-03 12:13:20+02:00,ishepard,4
+pydriller,56b6bc77f33687f2a2338815008df88fe465d068,new test repos,2018-04-03 12:28:15+02:00,ishepard,1
+pydriller,e7255f596a1cde0f9f42a962969d541e5186c441,small,2018-04-03 16:00:30+02:00,ishepard,2
+pydriller,d8393e4bb025f5093a58099144100587716eea0a,README modified,2018-04-03 16:02:49+02:00,ishepard,1
+pydriller,607a0b7373d9e63559fa637e357fdb48d9641fbf,add README,2018-04-04 10:27:34+02:00,ishepard,1
+pydriller,8257d44bdd49f0318641ad23bc5cb6dbad01e021,more README,2018-04-04 11:36:59+02:00,ishepard,1
+pydriller,f3a99e137a624396cf587f04ab3ddc42044c09d3,more readme,2018-04-04 12:07:21+02:00,ishepard,1
+pydriller,bf5208c06e64153d180faf26cd9a86426631c2e4,finish readme,2018-04-04 13:21:56+02:00,ishepard,1
+pydriller,28b02cb88557902e59cb467a2707ea52b92a4972,add docs,2018-04-04 13:55:33+02:00,ishepard,5
+pydriller,35b6eb6200445149d734cfbc4671523148842ff6,new docs,2018-04-04 14:27:24+02:00,ishepard,5
+pydriller,41b16cc75ea09c64d2d755f0b3a5071487355516,changing theme,2018-04-04 14:40:48+02:00,ishepard,1
+pydriller,4be0402d466470ae7274c4244bad2712dfeda3ab,structure changed. now everything is in pydriller,2018-04-04 17:54:13+02:00,ishepard,31
+pydriller,df51c5ef1ab01640971ececfd3354623bc67dc2e,big change: CommitVisitor is no longer needed. Now RepositoryMining returns a generator instead,2018-04-05 10:58:38+02:00,ishepard,36
+pydriller,af55be1a9dc9c226992453481e74ada94fb8e6ed,just to trigger travis-ci.org,2018-04-05 11:00:55+02:00,ishepard,1
+flask,33850c0ebd23ae615e6823993d441f46d80b1ff0,Initial checkin of stuff that exists so far.,2010-04-06 13:12:57+02:00,Armin Ronacher,15
+flask,b15ad394279fc3b7f998fa56857f334a7c0156f6,Added setup.py and README,2010-04-06 13:23:18+02:00,Armin Ronacher,2
+flask,4ec7d2a0d8eac4f915dc0d38a886cd57045bb0c4,"Started working on documentation.
+
+So far just the stable parts :)",2010-04-06 16:02:14+02:00,Armin Ronacher,9
+flask,44b42e0fbd93d86e0f4e929bda8e5fb63e81035d,Added a README file for MiniTwit.,2010-04-06 16:16:34+02:00,Armin Ronacher,1
+flask,3b36bef2e6165bb4dad73d17f23ee1879e99f497,"Improved documentation, added a contextmanager for request binding",2010-04-08 19:03:15+02:00,Armin Ronacher,4
+flask,4aa76212d1be9b17a57249549c2a73fb10b6cda8,Updated documentation.  Starting to look pretty good,2010-04-09 01:32:39+02:00,Armin Ronacher,6
+flask,625eba4bb403296a8bbc1e72cc9cf4a5126f6c02,Heavily improved quickstart section.,2010-04-09 12:49:01+02:00,Armin Ronacher,1
+flask,4edec48b74dbb9d571e927b69b24c30ec0624975,Added installation docs,2010-04-09 13:13:39+02:00,Armin Ronacher,1
+flask,727c701686c18c4a27ca523eb0c5862d497be24e,And finished documentation for most parts.,2010-04-09 13:40:05+02:00,Armin Ronacher,5
+flask,a9d4ea81da28ee9c894bf9d45adc4cfa9d52fddc,Flashing -> patterns documentation,2010-04-09 13:46:12+02:00,Armin Ronacher,2
+flask,7d6b8e9ab3e738d69e39ad53a7c0f6a552d5284a,Documented non-decorator uses of registation.,2010-04-09 13:56:47+02:00,Armin Ronacher,1
+flask,3d719f35f5c1ee4ce3dc01fb2167ef49c0180cf6,"Added docs, fixed some bugs I introduced last commit",2010-04-10 15:49:15+02:00,Armin Ronacher,13
+flask,9dfab582d065521e9350327801ed2c5ced1c8fa1,Updated README,2010-04-10 16:00:13+02:00,Armin Ronacher,1
+flask,8e9bd5f009bb8756a2a7d76a4b792323eeee49d6,Fixed a typo,2010-04-10 16:01:14+02:00,Armin Ronacher,1
+flask,4e1b3e1134eb478563bc434d794085d0a412cb84,set secret key :),2010-04-10 17:26:49+02:00,Armin Ronacher,1
+flask,05f36c7f7e2df36ee28f90d99632162579b1287c,Heavily improved documentation,2010-04-11 02:20:10+02:00,Armin Ronacher,10
+flask,1fff3e598126a084348ec2c112fdd3bc6b9a1ee0,Fixed a doc display bug and setup.py workaround for dev version.,2010-04-11 02:42:13+02:00,Armin Ronacher,3
+flask,574e81f9c8bbdc41958e1e7a7613633b091101f8,Fixed a bug in setup.py,2010-04-11 02:46:44+02:00,Armin Ronacher,2
+flask,df929c6c77ea5490a969275e45075c29711a498c,further improved documentation,2010-04-11 02:58:13+02:00,Armin Ronacher,1
+flask,8171da88a49eba769d313a51591ee8575be59762,Described HTTP methods,2010-04-11 03:16:42+02:00,Armin Ronacher,1
+flask,85ca089dde8814c4a42ad4574cddce25d60e5e25,might -> must,2010-04-11 03:18:36+02:00,Armin Ronacher,1
+flask,4e7aa9e7f7a86ee0ea4b6801694c13151518cb52,Linked HTTP,2010-04-11 03:22:26+02:00,Armin Ronacher,1
+flask,4671429a509094f36e2294055340197091d39979,"Added a security section to the foreword and a footnote to the g
+variable",2010-04-11 03:41:01+02:00,Armin Ronacher,4
+flask,d78b04a3fca8d8887382606897d4a97e55062fda,Footnotes are 100% in width,2010-04-11 03:43:15+02:00,Armin Ronacher,1
+flask,6a3a046f55755f0691568431e68a8bfea8d89df0,Another doc improvement,2010-04-11 03:53:38+02:00,Armin Ronacher,1
+flask,0b8e01b4450d0ba8cb65751d866568fddc155fa4,Linked escape,2010-04-11 04:00:17+02:00,Armin Ronacher,1
+flask,03168a5d53457fdb8676a4ac9fca0f76a23c6852,Removed the useless apishowcase example,2010-04-11 17:58:45+02:00,Armin Ronacher,7
+flask,f2dc38cda61f76c64b97ab9f730accc986a4b188,Added tests for minitwit.  Testing with Flask is awesome,2010-04-11 18:45:06+02:00,Armin Ronacher,4
+flask,ef524f2cfd65377b3b9ce896e7a710472b13c0f6,No need for the closing import,2010-04-11 18:47:32+02:00,Armin Ronacher,1
+flask,03148dba6b26a2694da1d466584f50189c52e7b3,Added testing documentation,2010-04-11 19:18:40+02:00,Armin Ronacher,3
+flask,2f5a4f8dbc832b0daebcd66ea8b3969589191fa7,Doc updates and typo fixes,2010-04-12 00:14:59+02:00,Armin Ronacher,4
+flask,51c9829a9cdfa2bf301431f686d7a404cc7c5083,Fixed couple of errors in docs.,2010-04-12 16:18:01+08:00,moraes,3
+flask,36071ca1f42a26ef327e9d14e4909a8c92cd4fae,added in example tornado and gevent usage for flask integration,2010-04-12 23:54:30+08:00,Justin Quick,1
+flask,a01e8b49ca66608f0bd46134ff02deeb5724c799,Fixed a documentation error and implemented template context processors.,2010-04-12 19:52:18+02:00,Armin Ronacher,1
+flask,de03143f6ecf9a36dd32f16f07309c64d4de03b0,Added some basic tests for flask itself,2010-04-12 20:19:16+02:00,Armin Ronacher,1
+flask,4affedec356ad8c9e6a107578f03fc7f5c615064,Testing URL generation,2010-04-12 20:39:52+02:00,Armin Ronacher,1
+flask,959b5df00431c436474c5abca304e631c0de7721,Flask can depend on Jinja2 and Werkzeug now that they are relased.,2010-04-13 01:08:52+02:00,Armin Ronacher,1
+flask,a42728568e18bedf588be2357b56021ab85b9fad,Improved Flask README regarding Jinja2 and Werkzeug,2010-04-13 01:42:31+02:00,Armin Ronacher,1
+flask,8009bd986940378bba1399dbfce90d03e441467b,Fixed the mod_wsgi docs. Thanks Graham,2010-04-14 02:17:55+02:00,Armin Ronacher,1
+flask,08f1f0dc32004fae01cf96d1eed84e6461e698e5,Added more Flask tests,2010-04-14 02:42:12+02:00,Armin Ronacher,5
+flask,ca520fb7e4c29afccc637e61c11429a0f3e8d5ad,"Static files are active in the WSGI app now, not just the server.",2010-04-14 14:11:00+02:00,Armin Ronacher,3
+flask,2d9bb692728fd76b19e467499caa4f5fcb07aede,Flask now runs without the presence of pkg_resources as well.,2010-04-14 15:16:38+02:00,Armin Ronacher,1
+flask,c33675f0251071ea47ce166b81ce8c637842f091,"Added mini blogging application as Flask example.
+
+This should become the tutorial.",2010-04-14 16:44:29+02:00,Armin Ronacher,7
+flask,fc94599285aa1aec50b3c9426697249e55edda0a,Removed useless imports and added README,2010-04-14 16:47:53+02:00,Armin Ronacher,2
+flask,1d8432ebfd1637eacab79a15e9b7963bf061371c,Can't believe I forgot that future import.,2010-04-14 17:08:38+02:00,Armin Ronacher,1
+flask,c4f5c2fb9afc1679c085500830bd53fab93ad885,Fixed a typo,2010-04-14 17:09:34+02:00,Armin Ronacher,1
+flask,1246f4088a4fdc00a79f8029ff5d77bfe4fc9b14,First part of the tutorial.  Many explanations missing but it's a start.,2010-04-15 02:21:46+02:00,Armin Ronacher,9
+flask,6dd92ae4b32c336564231e10db12458a8b9261ca,Beefed up the tutorial,2010-04-16 02:03:45+02:00,Armin Ronacher,7
+flask,40e0024d7b87150ed694829a5335bd2435962225,"Added screenshot of the debugger to Flask docs.  Flask now runs from the
+shell again.",2010-04-16 02:14:54+02:00,Armin Ronacher,3
+flask,7b5015010bc8c2a2d56c7c50b37e5b9facdad102,"Preserve the request context in debug mode.
+
+This makes it possible to access request information in the interactive
+debugger.  Closes #8.",2010-04-16 02:27:37+02:00,Armin Ronacher,1
