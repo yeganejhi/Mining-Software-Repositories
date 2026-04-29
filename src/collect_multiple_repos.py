@@ -33,5 +33,5 @@ for repo_path in repos:
         count += 1
 df=pd.DataFrame(all_commits)
 df.to_csv("data/multi_repo_commits.csv", index=False)
-print("✅ Multi-repository dataset saved!")
+print("Multi-repository dataset saved!")
 print(f"Total commits collected: {len(df)}")

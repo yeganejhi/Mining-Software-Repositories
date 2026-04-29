@@ -20,12 +20,18 @@ for repo_path in repos:
         total_added = sum(m.added_lines for m in commit.modified_files)
         total_deleted = sum(m.deleted_lines for m in commit.modified_files)
 
+        files = []
+        for m in commit.modified_files:
+            if m.new_path:
+                files.append(m.new_path)
+
+        files_changed = ";".join(files)
         rows.append({
             "repo_name": repo_name,
             "commit_hash": commit.hash,
             "lines_added": total_added,
             "lines_deleted": total_deleted,
-            "files_changed": len(commit.modified_files)
+            "files_changed": files_changed
         })
 
 df = pd.DataFrame(rows)

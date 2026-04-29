@@ -12,6 +12,6 @@ df = pd.merge(
 
 df.to_csv("data/bugfix_dataset_final.csv", index=False)
 
-print("✅ Final dataset created!")
+print("Final dataset created!")
 print("Total rows:", len(df))
 print("Columns:", df.columns)
