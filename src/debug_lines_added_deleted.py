@@ -1,39 +1,93 @@
+# src/debug_lines_added_deleted.py
 from pydriller import Repository
 import pandas as pd
 import os
+import argparse
+import requests  
 
-repos = ["F:/repos/pydriller", "F:/repos/flask"]
-rows = []
+def parse_argument():
+    parser = argparse.ArgumentParser(
+        description="MSR Pipeline: Extract file changes and line stats (diff) from GitHub dynamically."
+    )
+    parser.add_argument(
+        "--input",
+        type=str,
+        default="data/bugfix_commits.csv",
+        help="path to filterd bugfix CSV"
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="data/bugfix_with_lines.csv",
+        help="Path to save the dataset with diff statistics.",
+    )
 
-bugfix_df = pd.read_csv("data/bugfix_commits.csv")
-target_hashes = set(bugfix_df["commit_hash"])
-for repo_path in repos:
+    return parser.parse_args()
+def fetch_online_diff_stats(repo_url, commit_hash):
+    try:
+        repo = Repository(repo_url, single=commit_hash)
+        # 🛠️ این خط اصلاح شد: تبدیل repo.traverse.commits به repo.traverse_commits
+        for commit in repo.traverse_commits():
+            py_files = []
+            insertions = 0
+            deletions = 0
 
-    repo_name = os.path.basename(repo_path)
-    print("Processing", repo_name)
+            for modified_file in commit.modified_files:
+                filename = modified_file.filename
 
-    for commit in Repository(repo_path).traverse_commits():
+                if filename.endswith(".py"):
+                    py_files.append(filename)
 
-        if commit.hash not in target_hashes:
-            continue
+                insertions += modified_file.added_lines
+                deletions += modified_file.deleted_lines
 
-        total_added = sum(m.added_lines for m in commit.modified_files)
-        total_deleted = sum(m.deleted_lines for m in commit.modified_files)
+            files_string = ";".join(py_files) if py_files else None
 
-        files = []
-        for m in commit.modified_files:
-            if m.new_path:
-                files.append(m.new_path)
+            return {
+                "files_changed": files_string,
+                "lines_added": insertions,
+                "lines_deleted": deletions,
+            }
+    except Exception:
+        return {"files_changed": None, "lines_added": 0, "lines_deleted": 0}
+    
+def main():
+    args = parse_argument()
 
-        files_changed = ";".join(files)
-        rows.append({
-            "repo_name": repo_name,
-            "commit_hash": commit.hash,
-            "lines_added": total_added,
-            "lines_deleted": total_deleted,
-            "files_changed": files_changed
-        })
+    if not os.path.exists(args.input):
+        print(f"❌ Error: Input file '{args.input}' not found. Run the extraction script first.")
+        return
+    
+    print(f"📖 Loading filtered bug-fix commits from: {args.input}")
+    df = pd.read_csv(args.input)
 
-df = pd.DataFrame(rows)
-df.to_csv("data/bugfix_with_lines.csv", index=False)
-print("Done! Diff info extracted for", len(df), "bugfix commits")
+    if "repo_url" not in df.columns:
+        df["repo_url"] = "https://github.com/psf/requests"
+
+    print("🌐 Connecting to GitHub dynamically to fetch diff statistics...")
+
+    files_changed_list = []
+    lines_added_list = []
+    lines_deleted_list = []
+
+    for _,row in df.iterrows():
+        url = row["repo_url"]
+        commit_hash = row["commit_hash"]
+
+        print(f"🔗 Fetching stats for commit: {commit_hash[:7]}...")
+
+        stats = fetch_online_diff_stats(url,commit_hash)
+
+        files_changed_list.append(stats["files_changed"])
+        lines_added_list.append(stats["lines_added"])
+        lines_deleted_list.append(stats["lines_deleted"])
+
+    df["files_changed"] = files_changed_list
+    df["lines_added"] = lines_added_list
+    df["lines_deleted"] = lines_deleted_list
+
+    df.to_csv(args.output, index=False)
+    print(f"✅ Online diff extraction completed! Dataset saved to: {args.output}")
+if __name__ == "__main__":
+    main()
+
