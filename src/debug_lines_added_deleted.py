@@ -26,7 +26,6 @@ def parse_argument():
 def fetch_online_diff_stats(repo_url, commit_hash):
     try:
         repo = Repository(repo_url, single=commit_hash)
-        # 🛠️ این خط اصلاح شد: تبدیل repo.traverse.commits به repo.traverse_commits
         for commit in repo.traverse_commits():
             py_files = []
             insertions = 0

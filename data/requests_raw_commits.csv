@@ -1,0 +1,41 @@
+repo_name,commit_hash,message,date,author,files_changed_count
+requests,e7615cbc6b4af5985c4e0d4848a426e2d35f79c3,first commit,2011-02-13T13:41:18-05:00,Kenneth Reitz,1
+requests,d0bf5538097cbdee663eddf4e29e9f34106c67cb,no mo of that,2011-02-13T13:52:30-05:00,Kenneth Reitz,1
+requests,0477018761c67152cdcc0b83d56f27e701e65b9e,easy setup.py,2011-02-13T13:52:37-05:00,Kenneth Reitz,1
+requests,75b499dd046060021db0c7a772dd34df9374a30b,sample test fixtures (none),2011-02-13T13:52:47-05:00,Kenneth Reitz,1
+requests,c51b44d96bb460ebea3daee7deeff6b686585087,ISC License by mee,2011-02-13T13:53:01-05:00,Kenneth Reitz,1
+requests,72e99c0f49823a5b798f8d15896480b7216c4fba,histories,2011-02-13T13:53:08-05:00,Kenneth Reitz,1
+requests,ffdbc387ea67398ac123b2ff5a5d69df3e198340,ignore it,2011-02-13T13:53:15-05:00,Kenneth Reitz,1
+requests,853a4fd04ce3f4644e204418ee2cd694d9f29180,generic skeleton,2011-02-13T13:53:25-05:00,Kenneth Reitz,3
+requests,a6ffd97ef150f50eb1a0e0e54edf217831011753,initial readme,2011-02-13T13:56:54-05:00,Kenneth Reitz,1
+requests,45c6897128c1e20a98cf259101067123a4768793,good readme update,2011-02-13T15:08:32-05:00,Kenneth Reitz,1
+requests,23842865e973f9aacd58fa935f1fec5c2069de11,readme update,2011-02-13T15:10:54-05:00,Kenneth Reitz,1
+requests,b079a4e03e1a07ce0dd10a3b17d795c9452c9691,added content attributes,2011-02-13T15:47:00-05:00,Kenneth Reitz,1
+requests,c840bc7d0962d253afd4c8a72c242cbf2b882dc0,readme update,2011-02-13T15:49:34-05:00,Kenneth Reitz,1
+requests,d6cf93e3989d03dcaa19f92619ddb0021ccb49f4,added url parameter,2011-02-13T15:50:55-05:00,Kenneth Reitz,1
+requests,d8b19573f38aa84db95a7e4d1f1c0a2fa26517eb,basic layout in place,2011-02-13T16:03:47-05:00,Kenneth Reitz,1
+requests,b72e1d19aff997d00ef617a3aa0eea8ccdcc3984,AuthAuths,2011-02-13T16:16:36-05:00,Kenneth Reitz,1
+requests,54240b4811b66dc7d5c2738b91994c21023f0e9e,core update,2011-02-13T16:24:14-05:00,Kenneth Reitz,1
+requests,ef9bae8d9f2dc605d4fbcdf24256b6cc82612a2d,basic handling configuration in place w/ autoauth,2011-02-13T16:41:58-05:00,Kenneth Reitz,1
+requests,32cc197a81502c30715c9e164006dce6debcd1bf,fixes,2011-02-13T16:59:01-05:00,Kenneth Reitz,1
+requests,49f915fb90f135082a83f64a21cc901d0b0e4d15,"temp ""tests""",2011-02-13T16:59:13-05:00,Kenneth Reitz,1
+requests,af272d58276a9d1415a563e4ac763a6207742342,Base GET in place. No AUTH yet.,2011-02-13T17:13:10-05:00,Kenneth Reitz,1
+requests,e9c2b917d2ba340e440f3da35846167c86c610a8,filling out the gaps,2011-02-13T17:17:33-05:00,Kenneth Reitz,1
+requests,d4c1eccb449f538e233623bd5b5e8f350f266e88,Readme redirection mention,2011-02-13T18:03:33-05:00,Kenneth Reitz,1
+requests,44aa6806f3bf2255c151ec2661b8765ca190c0c4,Basic POST in place.,2011-02-13T18:03:48-05:00,Kenneth Reitz,1
+requests,327d923ce673a13c170446911ceec50529a9253c,GET and POST completely in place,2011-02-13T18:07:37-05:00,Kenneth Reitz,1
+requests,4f9d598ff486396d9ad45c7e402abe099dec8f4a,parameters working for GETs now. This is awesome.,2011-02-13T18:26:17-05:00,Kenneth Reitz,1
+requests,871de2ab23a49dd0beaee4cd8742c54038d16e96,HEAD Support,2011-02-13T18:33:50-05:00,Kenneth Reitz,1
+requests,71df02df2c9ab37a8ee40b31f5e28742d1a6cee8,urllib2 Request subclass w/ settable methods,2011-02-13T18:49:02-05:00,Kenneth Reitz,1
+requests,3c32045da05cda554e65d3b943bb1128b2482c7f,FIXED,2011-02-13T19:02:11-05:00,Kenneth Reitz,1
+requests,6fb1997b6a37f27aeda5e26aebcb886a4d2b817a,DELETE in place.,2011-02-13T19:04:47-05:00,Kenneth Reitz,1
+requests,7de5726a812c5ae2cb8204e2974b62ca2750c9d0,log 405 issue,2011-02-13T19:05:13-05:00,Kenneth Reitz,1
+requests,f1d9aae10e82e7d122b2172616c7a675971cd0e6,all caps only for request methods,2011-02-13T22:00:31-05:00,Kenneth Reitz,1
+requests,f566bb21400cecf4dfe5a6c7d9bc7fb62abbb57d,Much better exception handling,2011-02-13T22:50:45-05:00,Kenneth Reitz,1
+requests,59c6aebd606e3c5fb7b684817faa92051fc0295a,"Wow, and AUTO_AUTH works. first try!",2011-02-13T22:53:14-05:00,Kenneth Reitz,1
+requests,2c168d20a5b3ce7bbf711fd70c9a29b9d5c32be7,no dependencies!,2011-02-13T22:56:13-05:00,Kenneth Reitz,1
+requests,4018276b54a644f3529cbe751e8db594056dc9e9,v0.2.0,2011-02-13T22:56:20-05:00,Kenneth Reitz,1
+requests,e796aae504ac3170d01d0be92c87a9c39350bbf9,Documentation update.,2011-02-13T23:25:41-05:00,Kenneth Reitz,1
+requests,e403a8a42c3fb94e95c48e71fdb944811a2b45f4,AutoAuth documentation.,2011-02-13T23:35:43-05:00,Kenneth Reitz,1
+requests,9f4ce17a29ead608a42649b3fec4a85b9911dbc9,v0.2.0,2011-02-13T23:35:53-05:00,Kenneth Reitz,1
+requests,fdd54e14d68123899e61dd651176264b1276f416,whitepacez,2011-02-13T23:51:29-05:00,Kenneth Reitz,1
