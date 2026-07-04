@@ -43,7 +43,7 @@ def parse_arguments():
     parser.add_argument(
         "--input",
         type=str,
-        default="data/bugfix_commits.csv",
+        default="data/bugfix_dataset_final.csv",
         help="Path to filtered bugfix CSV.",
     )
 
