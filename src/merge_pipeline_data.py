@@ -35,14 +35,14 @@ def main():
     if not os.path.exists(args.main_input) or not os.path.exists(
         args.complexity_input
     ):
-        print("❌ Error: One or both input files are missing. Check your path.")
+        print(" Error: One or both input files are missing. Check your path.")
         return
 
-    print("📖 Loading datasets for final integration...")
+    print(" Loading datasets for final integration...")
     main_df = pd.read_csv(args.main_input)
     complexity_df = pd.read_csv(args.complexity_input)
 
-    print("🧩 Injecting AST-based complexity metrics into the main dataset...")
+    print(" Injecting AST-based complexity metrics into the main dataset...")
     final_df = pd.merge(
         main_df, complexity_df, on="commit_hash", how="inner"
     )
@@ -55,9 +55,9 @@ def main():
 
     print("-" * 60)
     print(
-        f"🚀 PIPELINE COMPLETE: Final Enriched Dataset Created with {len(final_df)} rows!"
+        f" PIPELINE COMPLETE: Final Enriched Dataset Created with {len(final_df)} rows!"
     )
-    print(f"📦 Absolute Final Output Saved to: {args.output}")
+    print(f" Absolute Final Output Saved to: {args.output}")
     print("-" * 60)
 
 

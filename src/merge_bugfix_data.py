@@ -6,7 +6,7 @@ lines_df = pd.read_csv("data/bugfix_with_lines.csv")
 
 df = pd.merge(
     clean_df,
-    lines_df,
+    lines_df, 
     on=["repo_name", "commit_hash"],
     how="inner"
 )
