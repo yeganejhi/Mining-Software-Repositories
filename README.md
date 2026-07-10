@@ -98,10 +98,4 @@ python src/compute_complexity.py --mode local --repo-dir "F:/repos/"
 python src/merge_pipeline_data.py
 python src/eda_analysis.py
 python src/visualization.py
-💭 Contributions & FeedbackWe welcome contributions, academic critiques, and feature requests! If you have suggestions or want to adapt this pipeline for another framework, please feel free to point your ideas over to the Discussions tab or open a technical Issue. How to CiteIf you utilize this pipeline framework or its statistical insights in your empirical research, please cite it as follows:Code snippet@software{msr_pipeline_2026,
-  author = {Your Full Name},
-  title = {MSR-Pipeline: Automated Bug-Fix Mining and Metadata Enrichment},
-  year = {2026},
-  publisher = {GitHub},
-  url = {[https://github.com/yourusername/msr-pipeline](https://github.com/yourusername/msr-pipeline)}
-}
+💭 Contributions & FeedbackWe welcome contributions, academic critiques, and feature requests! If you have suggestions or want to adapt this pipeline for another framework, please feel free to point your ideas over to the Discussions tab or open a technical Issue.
