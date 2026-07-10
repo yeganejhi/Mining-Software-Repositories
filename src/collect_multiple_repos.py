@@ -53,7 +53,7 @@ def main():
             else os.path.basename(repo_path)
         )
         print(
-            f"🚀 Processing repository: {repo_name} (Max Commits: {args.max_commits})"
+            f" Processing repository: {repo_name} (Max Commits: {args.max_commits})"
         )
 
         count = 0
@@ -75,18 +75,18 @@ def main():
                 count += 1
 
         except Exception as e:
-            print(f"❌ Error processing repository {repo_path}: {e}")
+            print(f" Error processing repository {repo_path}: {e}")
             continue
 
     if not all_commits:
-        print("⚠️ No commits collected.")
+        print(" No commits collected.")
         return
 
     df = pd.DataFrame(all_commits)
     df.to_csv(args.output, index=False)
 
-    print("\n✅ Multi-repository dataset saved successfully!")
-    print(f"📊 Total commits collected: {len(df)} across {len(args.repos)} repos.")
+    print("\n Multi-repository dataset saved successfully!")
+    print(f" Total commits collected: {len(df)} across {len(args.repos)} repos.")
 
 
 if __name__ == "__main__":

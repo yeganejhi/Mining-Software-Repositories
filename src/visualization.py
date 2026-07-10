@@ -7,13 +7,13 @@ import seaborn as sns
 
 def load_dataset(file_path="data/final_enriched_bugfixes.csv"):
     if not os.path.exists(file_path):
-        print(f"❌ Error: Dataset '{file_path}' not found.")
+        print(f" Error: Dataset '{file_path}' not found.")
         return None
     return pd.read_csv(file_path)
 
 
 def main():
-    print("📖 Loading final enriched dataset for visualization...")
+    print(" Loading final enriched dataset for visualization...")
     df = load_dataset()
 
     if df is None:
@@ -49,7 +49,7 @@ def main():
     plt.tight_layout()
     plt.show()
 
-    print("✅ Visualizations generated successfully!")
+    print(" Visualizations generated successfully!")
 
 
 if __name__ == "__main__":

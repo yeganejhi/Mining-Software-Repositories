@@ -37,12 +37,12 @@ def parse_arguments():
 def main():
     args = parse_arguments()
     if not os.path.exists(args.input):
-        print(f"❌ Error: Input file '{args.input}' does not exist.")
+        print(f" Error: Input file '{args.input}' does not exist.")
         return
     
-    print(f"📖 Loading dataset from: {args.input}")
+    print(f" Loading dataset from: {args.input}")
     df = pd.read_csv(args.input)
-    print("🧠 Applying advanced bug-fix heuristics...")
+    print(" Applying advanced bug-fix heuristics...")
     df["is_bugfix"] = df["message"].apply(is_bugfix)
 
     bugfix_df = df[df["is_bugfix"]==True].copy()
@@ -52,6 +52,6 @@ def main():
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
     bugfix_df.to_csv(args.output, index=False)
-    print(f"✅ Bug-fix dataset saved! Found {len(bugfix_df)} commits.")
+    print(f" Bug-fix dataset saved! Found {len(bugfix_df)} commits.")
 if __name__ == "__main__":
     main()
