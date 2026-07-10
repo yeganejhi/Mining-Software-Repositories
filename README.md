@@ -4,26 +4,28 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/)
 
-An automated, robust Mining Software Repositories (MSR) pipeline designed to extract, clean, and enrich bug-fix commit data from remote GitHub repositories. This hybrid tool bridges the gap between raw Git process metrics (Code Churn) and source-code product metrics using Abstract Syntax Trees (AST).
+A pipeline for mining, cleaning, and enriching bug-fix commit data from GitHub repositories. It combines Git metrics (lines added/deleted) with AST-based code analysis to measure cyclomatic complexity.
 
 ---
 
 ## Highlights
 
-* **Approachable & Clean:** Built with rigorous data standards, making empirical software engineering research accessible without complex setups.
-* **Hybrid AST Streaming:** Tracks code quality metrics without requiring terabytes of local storage or full repository cloning.
-* **Scientific Insights:** Automatically extracts structural correlations ($r = -0.79$) between code complexity and change sizes.
-* **Dual Execution Paradigms:** Operates flawlessly in both network-isolated local servers or live GitHub API streaming.
+- No need to clone repos locally — works with remote streaming
+- Tracks both code churn and structural complexity
+- Can run fully online or offline if you have local repos
+- Generates correlation plots and stats automatically
 
 ---
 
 ## Overview
 
-In empirical software engineering, understanding structural decay and maintenance patterns requires a correlated analysis of process metrics (how code changes) and product metrics (how complex the code is). This project provides a multi-stage pipeline that automatically mines GitHub repositories, normalizes unstructured commit messages, tracks Code Churn (Lines Added/Deleted), and interfaces with AST analyzers to compute Cyclomatic Complexity scores.
+This project started as a way to understand how code complexity affects the way people fix bugs. The idea was to pull commit history from GitHub, filter out bug-fixing commits, and then look at two things: how much code changed (churn) and how complex the code was before the fix (cyclomatic complexity).
+
+The pipeline runs in stages — from raw commit mining to cleaning, merging, and finally generating plots and correlation stats.
 
 ### Why This Matters for Graduate Research
 
-This pipeline directly addresses a critical gap in MSR empirical research: the computational trade-off between structural data richness (AST metrics) and storage efficiency (remote mining). By implementing a dynamic streaming architecture, this framework enables large-scale empirical software engineering studies without requiring extensive hardware configurations. This makes comprehensive code-quality mining highly reproducible for independent researchers.
+I'm applying for grad school in software engineering and wanted to put together a project that touches both code analysis and empirical research. Most existing tools either require cloning entire repos (which takes forever) or don't dig into actual code structure. This pipeline tries to strike a balance — you get AST-level metrics without needing to store everything locally.
 
 ```text
 [Remote GitHub Repos] --> 1. collect_multiple_repos.py (Raw Mining)
@@ -35,7 +37,7 @@ This pipeline directly addresses a critical gap in MSR empirical research: the c
                            3. extract_clean_comments.py (UTC/Text Prep)
                                |
                                v
-                           4. debug_lines_added_deleted.py (Hybrid Churn)
+                           4. debug_line_added_deleted.py (Hybrid Churn)
                                |
                                v
                            5. merge_bugfix_data.py (Integration Part I)
@@ -54,110 +56,71 @@ This pipeline directly addresses a critical gap in MSR empirical research: the c
           (Statistical Models)  (Graphical Charts)
 ```
 
-## Guiding Research Questions
+## What I Wanted to Find Out
 
-This framework is architected to investigate three central research questions in empirical software engineering:
+I had three main questions going into this:
 
-RQ1: To what extent do process metrics (code churn) correlate with product metrics (cyclomatic complexity) in open-source bug-fix commits?
+1. How strongly does code churn correlate with complexity in bug-fix commits?
+2. Does this relationship change depending on the repository (e.g., smaller vs. larger projects)?
+3. Can we get useful AST metrics without cloning the whole repo?
 
-RQ2: Does the correlation strength vary across repository maturity levels and architectures (e.g., Flask vs. pydriller)?
+## Some Problems I Ran Into
 
-RQ3: Can a hybrid AST streaming approach achieve comparable accuracy to local file-system tree analysis?
+**Timezone mess**
 
-## Key Challenges and Solutions
+Commits come from all over the world, so timestamps are all over the place. I ended up normalizing everything to UTC using Pandas so I wouldn't have mismatched times in the final dataset.
 
-**Challenge 1: Distributed Timezones and Data Heterogeneity**
+**API rate limits**
 
-Context: Commits extracted from global open-source contributors contain diverse, localized timestamp offsets.
+Grabbing diffs from GitHub directly can be slow and sometimes hits rate limits. I used PyDriller's streaming generator to pull data incrementally instead of dumping everything at once.
 
-Solution: Implemented an aggressive datetime normalization layer using Pandas to force universal UTC alignment, resolving temporal misalignment in statistical tracking.
+**AST needs local files**
 
-**Challenge 2: Network-Bound API Limits and Churn Failures**
+Radon (the complexity tool) expects to read files from disk. But if you're running in online mode, you don't have the source code locally. So I added a hybrid fallback — fetch raw file contents from GitHub API when online, or use os.walk to find files when running locally.
 
-Context: Granular code churn analysis requires fetching live git diffs, which frequently causes network drops or API throttling.
+## What the Pipeline Produces
 
-Solution: Configured lightweight dynamic streaming through PyDriller's internal generator layer, minimizing memory footprints and preventing connection timeouts.
+The pipeline generates a structured dataset with:
 
-**Challenge 3: Missing Local Trees for AST Parsers**
+- **Process metrics:** lines added, lines deleted, total churn per commit
+- **Product metrics:** cyclomatic complexity per function, max complexity, average complexity
+- **Metadata:** normalized timestamps (UTC) and cleaned commit messages
 
-Context: Static analysis engines (e.g., Radon) strictly require a physical file system path to run abstract syntax parsing, which contradicts the remote cloning avoidance strategy.
+You also get:
 
-Solution: Architected a Truly Dynamic Hybrid Mode. When running online, the system dynamically fetches raw code snippets from GitHub's API on the fly; when running locally, it performs a highly optimized tree search (os.walk) to map missing nested paths automatically.
+- Descriptive stats (mean, median, std dev) for churn and complexity
+- Correlation matrices (Pearson + Spearman)
+- Histograms with KDE overlays showing how patch sizes are distributed
+- Comparative bar charts across multiple repos
 
-## Sample Analytical Output & Discoveries
+All plots are saved in the `plots/` directory.
 
-**Empirical Metrics Summary**
+## Known Limitations
 
-The pipeline extracts deep product and process metrics, exposing critical maintenance behavior:
+| Limitation | Why it matters | What I did about it |
+|------------|----------------|----------------------|
+| Python files only | Can't analyze other languages yet | Kept the architecture modular so adding Java/JS later is easier |
+| Relies on commit messages | Might miss bugfixes that aren't tagged clearly | Made the regex patterns configurable |
+| GitHub API rate (5k/hour) | Can't mine huge repos in one go | Added a local mode for large-scale runs |
+| Correlation != causation | Can't claim complexity *causes* smaller fixes | Used it for hypothesis generation, not confirmation |
 
-| Repository | Bugfix Commits Checked | Avg Complexity (Radon CC) | Max Complexity Discovered | High-Complexity Functions (>5 CC) | Key Insights |
-|------------|----------------------|--------------------------|--------------------------|-----------------------------------|--------------|
-| pydriller | 4 | 3.97 | 16.0 | 13 | High structural risk; bugs touch complex code. |
-| flask | 1 | Metadata Only | Metadata Only | 0 | Non-functional configuration changes (setup.py). |
-
-**Key Statistical Discovery (Exploratory Data Analysis)**
-
-Execution of the statistical layer (eda_analysis.py) uncovered a powerful empirical phenomenon:
-
-Statistical Correlation (Total Lines Changed vs. Max Complexity) = -0.79
-
-Interpretation: A strong negative correlation indicates that as a file's complexity nears critical levels (e.g., CC = 16), developers actively minimize the size of their bug-fixes. Out of structural fear, fixes become surgical, micro-level adjustments (e.g., modifying a single conditional block) rather than large-scale rewrites.
-
-**Generated Insights & Visualizations**
-
-The visualization layer produces high-resolution analytical plots saved automatically in the project directory:
-
-Distribution of Bug-Fix Change Size
-
-Commit Distribution Across Targets
-
-Figure 1: Negative correlation ($r=-0.79$) between patch size and complexity
-
-Figure 2: Distribution of complex functions across repositories
-
-## Pipeline Validation Metrics
-
-| Metric | Value | Target | Status |
-|--------|-------|--------|--------|
-| Bugfix Detection Precision | 89.2% | >85% | Exceeded |
-| AST Analysis Success Rate (Online) | 86.4% | >80% | Exceeded |
-| AST Analysis Success Rate (Local) | 94.7% | >90% | Exceeded |
-| Pipeline Completion Rate | 98.3% | >95% | Exceeded |
-| Mean Execution Time (100 commits) | 12.4s | <20s | Exceeded |
-
-Validated across verified tracking baselines using a multi-repository testbed.
-
-## Known Limitations & Mitigations
-
-| Limitation | Impact | Mitigation |
-|------------|--------|------------|
-| Python-only AST analysis | Limited language scope | Extensible module architecture designed for future multi-language parser attachment. |
-| Relies on conventional commit messages | May miss non-standard bugfixes | Fully configurable regex pattern matching inside extraction layers. |
-| Online mode limited by GitHub API rate | Scalability ceiling (5,000 req/hour) | High-speed local processing mode supplied for large-scale mining studies. |
-| Correlation $\neq$ Causation | Statistical inference limits | Modeled exclusively for empirical hypothesis generation, not causal confirmation. |
-
-## 30-Second Quick Start
+## Quick Start (30 seconds)
 
 ```bash
-# Clone and install dependencies
 git clone https://github.com/yourusername/msr-pipeline.git
 cd msr-pipeline && pip install -r requirements.txt
 
-# Mine 5 bug-fix commits from Flask (Online Mode)
 python src/collect_multiple_repos.py --repos flask --max-commits 5
 python src/extract_bugfix_commits.py
 python src/compute_complexity.py --mode online
 python src/visualization.py
-
-# Verified results will be available in data/ and plots/
 ```
 
-## Comprehensive Installation
+Check `data/` for CSV outputs and `plots/` for generated figures.
 
-**Prerequisites**
+## Installation
 
-Python 3.8 or higher
-Git
+You'll need Python 3.8+ and Git.
 
 ```bash
 git clone https://github.com/yourusername/msr-pipeline.git
@@ -165,58 +128,52 @@ cd msr-pipeline
 pip install -r requirements.txt
 ```
 
-Note: The environment requires pandas, pydriller, radon, requests, matplotlib, and seaborn.
+Dependencies: pandas, pydriller, radon, requests, matplotlib, seaborn.
 
-## Full Execution Instructions
+## Running the Pipeline
 
-**Option A: Pure Remote / Online Mode**
-
-Ideal when you want to avoid cloning repositories locally and stream everything directly from GitHub.
+**Option A: Online Mode** (no local cloning)
 
 ```bash
-# Step 1: Mine metadata using full remote URLs
 python src/collect_multiple_repos.py --repos https://github.com/pallets/flask https://github.com/ishepard/pydriller
-
-# Step 2: Filter bugfixes and clean text strings
 python src/extract_bugfix_commits.py
 python src/extract_clean_comments.py
-
-# Step 3: Extract churn and calculate AST metrics via remote streaming
-python src/debug_lines_added_deleted.py --mode online
+python src/debug_line_added_deleted.py --mode online
 python src/merge_bugfix_data.py
 python src/compute_complexity.py --mode online
-
-# Step 4: Final Consolidation & Analytics
 python src/merge_pipeline_data.py
 python src/eda_analysis.py
 python src/visualization.py
 ```
 
-**Option B: Local / Offline Mode**
-
-Ideal when repositories are already cloned on your machine for ultra-fast local processing.
+**Option B: Local Mode** (faster if repos are already on your machine)
 
 ```bash
-# Pre-requisite: Ensure your repositories are downloaded in a directory (e.g., F:/repos/)
-
-# Step 1: Mine using short names
+# Make sure your repos are in a directory, e.g., F:/repos/
 python src/collect_multiple_repos.py --repos flask pydriller
-
-# Step 2: Filter bugfixes and clean text strings
 python src/extract_bugfix_commits.py
 python src/extract_clean_comments.py
-
-# Step 3: Run local tree walks and extract churn from local paths
-python src/debug_lines_added_deleted.py --mode local --repo-dir "F:/repos/"
+python src/debug_line_added_deleted.py --mode local --repo-dir "F:/repos/"
 python src/merge_bugfix_data.py
 python src/compute_complexity.py --mode local --repo-dir "F:/repos/"
-
-# Step 4: Final Consolidation & Analytics
 python src/merge_pipeline_data.py
 python src/eda_analysis.py
 python src/visualization.py
 ```
+## Sample Output
 
-## Contributions & Feedback
+Here are some example plots generated by the pipeline:
 
-We welcome contributions, academic critiques, and feature requests! If you have suggestions or want to adapt this pipeline for another framework, please feel free to point your ideas over to the Discussions tab or open a technical Issue.
+![Correlation between churn and complexity](plots/Figure_1.png)
+
+*Figure 1: Distribution of lines changed (added + deleted) per bug-fix commit*
+
+![Commit distribution across repositories](plots/Figure_2.png)
+
+*Figure 2: Number of bug-fix commits across repositories*
+
+## Contributing
+
+If you're using this for research or have ideas on how to make it better, feel free to open an issue or start a discussion.
+
+*Built for research and experimentation. Feedback welcome.*
