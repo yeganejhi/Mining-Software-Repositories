@@ -64,6 +64,7 @@ def main():
 
                 commit_data = {
                     "repo_name": repo_name,
+                    "repo_url": repo_path,
                     "commit_hash": commit.hash,
                     "message": commit.msg,
                     "date": commit.committer_date.isoformat(),

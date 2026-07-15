@@ -25,20 +25,37 @@ def parse_argument():
 def fetch_diff_stats(repo_path, commit_hash):
     try:
         repo = Repository(repo_path, single=commit_hash)
+
         for commit in repo.traverse_commits():
             py_files = []
             insertions = 0
             deletions = 0
+
             for modified_file in commit.modified_files:
-                filename = modified_file.filename
-                if filename.endswith(".py"):
-                    py_files.append(filename)
+
+                file_path = modified_file.new_path or modified_file.old_path
+
+                if file_path and file_path.endswith(".py"):
+                    py_files.append(file_path)
+
                 insertions += modified_file.added_lines
                 deletions += modified_file.deleted_lines
+
             files_string = ";".join(py_files) if py_files else None
-            return {"files_changed": files_string, "lines_added": insertions, "lines_deleted": deletions}
-    except Exception:
-        return {"files_changed": None, "lines_added": 0, "lines_deleted": 0}
+
+            return {
+                "files_changed": files_string,
+                "lines_added": insertions,
+                "lines_deleted": deletions,
+            }
+
+    except Exception as e:
+        print(f"Error processing commit {commit_hash}: {e}")
+        return {
+            "files_changed": None,
+            "lines_added": 0,
+            "lines_deleted": 0,
+        }
     
 def main():
     args = parse_argument()
@@ -61,10 +78,10 @@ def main():
         if args.mode == "local":
             path_to_open = os.path.join(args.repo_dir, repo_name)
         else:
-            if "repo_url" in row and pd.notna(row["repo_url"]):
+            if "repo_url" in df.columns and pd.notna(row["repo_url"]):
                 path_to_open = row["repo_url"]
             else:
-                path_to_open = f"https://github.com/{repo_name}/{repo_name}"
+                path_to_open = repo_name
 
         print(f" Target Path -> {path_to_open} (Commit: {commit_hash[:7]})")
         stats = fetch_diff_stats(path_to_open, commit_hash)
