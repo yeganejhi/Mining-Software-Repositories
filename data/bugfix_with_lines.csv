@@ -1,2 +1,38 @@
-repo_name,commit_hash,message,date,author,files_changed_count,repo_url,files_changed,lines_added,lines_deleted
-requests,7de5726a812c5ae2cb8204e2974b62ca2750c9d0,log 405 issue,2011-02-13T19:05:13-05:00,Kenneth Reitz,1,https://github.com/psf/requests,,4,0
+repo_name,repo_url,commit_hash,message,date,author,files_changed_count,files_changed,lines_added,lines_deleted
+flask,F:/repos/flask,574e81f9c8bbdc41958e1e7a7613633b091101f8,Fixed a bug in setup.py,2010-04-11T02:46:44+02:00,Armin Ronacher,2,setup.py,5,2
+flask,F:/repos/flask,5310fc38227b1907cb541f4a30ea8dfef46c2e19,"Session falls back to a dummy object now if secret_key is missing.
+
+This makes it possible to still read-only access the empty session but
+requires the secret key to be set for write access.  The error message
+raised explains that.  This closes #10.",2010-04-17T14:10:47+02:00,Armin Ronacher,2,flask.py;tests\flask_tests.py,34,3
+flask,F:/repos/flask,73a47a0db1a181bb305684115d3dacded0c5a58b,Removed unused stuff from minitwit and fixed a bug.,2010-04-18T23:42:11+02:00,Armin Ronacher,1,examples\minitwit\minitwit.py,1,3
+flask,F:/repos/flask,3088a9371e065808fd0091741f62bc242bcab1f9,"Make it easier to associate a rule, endpoint and view_function
+This resolves http://github.com/mitsuhiko/flask/issues/issue/11",2010-04-20T01:33:12+08:00,unknown,2,flask.py;tests\flask_tests.py,33,3
+flask,F:/repos/flask,3c821a0fa45082bcec73dfb08662fb1de5263c48,Fix typos and remove unused import.,2010-04-20T18:40:58+02:00,florentx,6,examples\minitwit\minitwit.py;flask.py;setup.py,15,14
+flask,F:/repos/flask,f014ce29a7cd5a3ccfabd61e7d66e017ed958e25,"Fix a doc oversight, and revert 5876a8fd.",2010-04-21T16:36:19+08:00,florentx,2,flask.py,3,2
+pydriller,F:/repos/pydriller,9893e66bda467488fc27694d8dc64cde34bc2873,fixing bug of memory consumption,2018-03-30T09:11:56+02:00,ishepard,3,repository_mining.py;scm\git_repository.py;tests\test_memory_consumption.py,16,11
+pydriller,F:/repos/pydriller,bbc5ea4097bf4c4186f6516156017520f9146380,fix requirements,2018-03-30T09:14:17+02:00,ishepard,1,,2,1
+pydriller,F:/repos/pydriller,7677ce1c682d36ad2436f488889c83c8e3cb01fe,fix bug of timezones,2018-03-30T14:06:06+02:00,ishepard,3,scm\git_repository.py;tests\test_git_repository.py;tests\test_memory_consumption.py,28,20
+pydriller,F:/repos/pydriller,2efde2c75a2ff55ff401868b2f4eb6c8c993d4b3,small fix,2018-03-30T22:03:30+02:00,ishepard,6,tests\integration\test_between_dates.py;tests\integration\test_dates_and_timezones.py;tests\integration\test_reverse_order.py;tests\test_commit.py;tests\test_memory_consumption.py;tests\test_ranges.py,3,11
+pydriller,F:/repos/pydriller,f554115a3811230587bd32bb1fe5a960a380673a,small error in .yml file,2018-04-05T19:07:49+02:00,ishepard,1,,1,1
+pydriller,F:/repos/pydriller,1e793ab306e09b4a025d44f0435b640b7d0d3940,fix type hinting problem,2018-04-07T10:02:00+02:00,ishepard,1,pydriller\git_repository.py,1,1
+pydriller,F:/repos/pydriller,6873bbd5e116ff8e75b0b840bbb27f05085dd017,fix dependency in setup.py and add asserts in test_diff,2018-04-09T11:52:54+02:00,ishepard,2,setup.py;tests\test_diff.py,8,2
+pydriller,F:/repos/pydriller,52cc0bc1e5cbed35669597651c411559d96410e1,fix in wrong dependency,2018-05-24T17:18:53+02:00,ishepard,1,,1,1
+pydriller,F:/repos/pydriller,6d5d5c2db6d9ba84ce228ef18395d93aa25d96c1,new test for bug inducing commit,2018-06-06T13:16:58+02:00,ishepard,3,tests\test_git_repository.py;tests\test_memory_consumption.py,9,3
+pydriller,F:/repos/pydriller,d7058bdfb1f86e4dd263b40e6e2d1093e3daa5b2,solved a bug that wrongly calculate the useless lines,2018-06-06T14:47:26+02:00,ishepard,3,pydriller\git_repository.py;tests\test_git_repository.py,17,3
+pydriller,F:/repos/pydriller,0887af793aff8998701d2e90d74871c4f17ccbe1,small fix that required a lazy property to be evaluated when logging,2018-06-06T14:55:16+02:00,ishepard,1,pydriller\repository_mining.py,2,2
+pydriller,F:/repos/pydriller,4d279e11c742d3dc1f21f945982c3d7c2402f879,"Merge pull request #3 from ishepard/szz
+
+Implementing function bug inducing commit (using SZZ)",2018-06-06T16:46:12+02:00,Spadini Davide,0,,0,0
+pydriller,F:/repos/pydriller,b27cfceff10b7e986408e9cd833acd635700813e,add test to reproduce reset issue (with commit not fully merged).,2018-08-01T21:11:07+08:00,Ledenel,2,tests\test_git_repository.py,13,0
+pydriller,F:/repos/pydriller,e9854bbea1cb7b7f06cbb559f7b06724d11ae1e5,fix reset issue by forcing temp branch to be deleted,2018-08-01T21:23:25+08:00,Ledenel,1,pydriller\git_repository.py,1,1
+pydriller,F:/repos/pydriller,967ac4f26dbc49d24a7e4a0f26271c532c0e2c14,"Merge pull request #5 from Ledenel/master
+
+fix GitRepository.reset() not working with checkout commit not merged into main branch",2018-08-02T10:05:11+02:00,Spadini Davide,0,,0,0
+pydriller,F:/repos/pydriller,5ea2a521e3e33ef905896156242c189a2cafda93,fix in requirements,2018-09-24T12:07:18+02:00,ishepard,1,,2,1
+pydriller,F:/repos/pydriller,6bd4c3eb1e29c214bb09f09ea82a2180e470dfcd,fixing error in travis if the test takes more than 10 minutes to run,2018-09-24T16:44:39+02:00,ishepard,1,,1,1
+pydriller,F:/repos/pydriller,534e2954db22b52b1707d3bf19d103bc2b415adc,Small fix in the init function of Modification. Mainly to fix BetterCodeHub error message.,2018-09-25T12:34:26+02:00,ishepard,2,pydriller\domain\commit.py;tests\test_commit.py,43,16
+pydriller,F:/repos/pydriller,347859b84a68a454050257fac97f50dc68ab7381,"fix bugs in repository mining, add tests. Thank you tests!!",2018-10-21T11:21:29+02:00,ishepard,2,pydriller\repository_mining.py;tests\test_repository_mining.py,60,10
+pydriller,F:/repos/pydriller,c3cdce16286281bb4f60d7c83ee766dc3d6f4420,using Path to obtain the filename. This should solve the issue #13.,2018-10-27T11:58:55+02:00,ishepard,2,pydriller\domain\commit.py;tests\test_commit.py,8,8
+pydriller,F:/repos/pydriller,d9ac435542e884c4e2035c384fbf4a00cc28be89,"- fixed bug for the parameter ""single"": in case the commit was not present in the repo, PyDriller was returning all the commits
+- fixed bug for consecutive checkouts: now it is possible to do it, however the last time git.reset() should be call to reset the status of the repo",2018-10-31T10:07:25+01:00,ishepard,5,pydriller\git_repository.py;pydriller\repository_mining.py;tests\integration\test_commit_filters.py;tests\test_git_repository.py;tests\test_repository_mining.py,33,4
