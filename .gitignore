@@ -1,2 +1,3 @@
 data/*
 !data/final_enriched_bugfixes.csv
+src/__pycache__/
