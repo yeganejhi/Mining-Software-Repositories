@@ -1,74 +1,186 @@
-MSR-Pipeline: Automated Bug-Fix Mining and Metadata EnrichmentAn automated, robust Mining Software Repositories (MSR) pipeline designed to extract, clean, and enrich bug-fix commit data from remote GitHub repositories. This hybrid tool bridges the gap between raw Git process metrics (Code Churn) and source-code product metrics using Abstract Syntax Trees (AST).HighlightsApproachable & Clean: Built with rigorous data standards, making empirical software engineering research accessible without complex setups.Hybrid AST Streaming: Tracks code quality metrics without requiring terabytes of local storage or full repository cloning.Scientific Insights: Automatically extracts structural correlations ($r = -0.79$) between code complexity and change sizes.Dual Execution Paradigms: Operates flawlessly in both network-isolated local servers or live GitHub API streaming.OverviewIn empirical software engineering, understanding structural decay and maintenance patterns requires a correlated analysis of process metrics (how code changes) and product metrics (how complex the code is). This project provides a multi-stage pipeline that automatically mines GitHub repositories, normalizes unstructured commit messages, tracks Code Churn (Lines Added/Deleted), and interfaces with AST analyzers to compute Cyclomatic Complexity scores.Why This Matters for Graduate ResearchThis pipeline directly addresses a critical gap in MSR empirical research: the computational trade-off between structural data richness (AST metrics) and storage efficiency (remote mining). By implementing a dynamic streaming architecture, this framework enables large-scale empirical software engineering studies without requiring extensive hardware configurations. This makes comprehensive code-quality mining highly reproducible for independent researchers.Plaintext[Remote GitHub Repos] --> 1. collect_multiple_repos.py (Raw Mining)
-                               |
-                               v
-                           2. extract_bugfix_commits.py (Regex Filter)
-                               |
-                               v
-                           3. extract_clean_comments.py (UTC/Text Prep)
-                               |
-                               v
-                           4. debug_lines_added_deleted.py (Hybrid Churn)
-                               |
-                               v
-                           5. merge_bugfix_data.py (Integration Part I)
-                               |
-                               v
-                           6. compute_complexity.py (AST Radon Engine)
-                               |
-                               v
-                           7. merge_pipeline_data.py (Final Consolidation)
-                               |
-                               v
-                    +---------+---------+
-                    |                   |
-                    v                   v
-           8. eda_analysis.py    9. visualization.py
-          (Statistical Models)  (Graphical Charts)
-Guiding Research QuestionsThis framework is architected to investigate three central research questions in empirical software engineering:RQ1: To what extent do process metrics (code churn) correlate with product metrics (cyclomatic complexity) in open-source bug-fix commits?RQ2: Does the correlation strength vary across repository maturity levels and architectures (e.g., Flask vs. pydriller)?RQ3: Can a hybrid AST streaming approach achieve comparable accuracy to local file-system tree analysis?Key Challenges and SolutionsChallenge 1: Distributed Timezones and Data HeterogeneityContext: Commits extracted from global open-source contributors contain diverse, localized timestamp offsets.Solution: Implemented an aggressive datetime normalization layer using Pandas to force universal UTC alignment, resolving temporal misalignment in statistical tracking.Challenge 2: Network-Bound API Limits and Churn FailuresContext: Granular code churn analysis requires fetching live git diffs, which frequently causes network drops or API throttling.Solution: Configured lightweight dynamic streaming through PyDriller's internal generator layer, minimizing memory footprints and preventing connection timeouts.Challenge 3: Missing Local Trees for AST ParsersContext: Static analysis engines (e.g., Radon) strictly require a physical file system path to run abstract syntax parsing, which contradicts the remote cloning avoidance strategy.Solution: Architected a Truly Dynamic Hybrid Mode. When running online, the system dynamically fetches raw code snippets from GitHub’s API on the fly; when running locally, it performs a highly optimized tree search (os.walk) to map missing nested paths automatically.Sample Analytical Output & DiscoveriesEmpirical Metrics SummaryThe pipeline extracts deep product and process metrics, exposing critical maintenance behavior:RepositoryBugfix Commits CheckedAvg Complexity (Radon CC)Max Complexity DiscoveredHigh-Complexity Functions (>5 CC)Key Insightspydriller43.9716.013High structural risk; bugs touch complex code.flask1Metadata OnlyMetadata Only0Non-functional configuration changes (setup.py).Key Statistical Discovery (Exploratory Data Analysis)Execution of the statistical layer (eda_analysis.py) uncovered a powerful empirical phenomenon:Statistical Correlation (Total Lines Changed vs. Max Complexity) = -0.79Interpretation: A strong negative correlation indicates that as a file's complexity nears critical levels (e.g., CC = 16), developers actively minimize the size of their bug-fixes. Out of structural fear, fixes become surgical, micro-level adjustments (e.g., modifying a single conditional block) rather than large-scale rewrites.Generated Insights & VisualizationsThe visualization layer produces high-resolution analytical plots saved automatically in the project directory:Distribution of Bug-Fix Change SizeCommit Distribution Across TargetsFigure 1: Negative correlation ($r=-0.79$) between patch size and complexityFigure 2: Distribution of complex functions across repositoriesPipeline Validation MetricsMetricValueTargetStatusBugfix Detection Precision89.2%>85%ExceededAST Analysis Success Rate (Online)86.4%>80%ExceededAST Analysis Success Rate (Local)94.7%>90%ExceededPipeline Completion Rate98.3%>95%ExceededMean Execution Time (100 commits)12.4s<20sExceededValidated across verified tracking baselines using a multi-repository testbed.Known Limitations & MitigationsLimitationImpactMitigationPython-only AST analysisLimited language scopeExtensible module architecture designed for future multi-language parser attachment.Relies on conventional commit messagesMay miss non-standard bugfixesFully configurable regex pattern matching inside extraction layers.Online mode limited by GitHub API rateScalability ceiling (5,000 req/hour)High-speed local processing mode supplied for large-scale mining studies.Correlation $\neq$ CausationStatistical inference limitsModeled exclusively for empirical hypothesis generation, not causal confirmation.30-Second Quick StartBash# Clone and install dependencies
-git clone https://github.com/yourusername/msr-pipeline.git
-cd msr-pipeline && pip install -r requirements.txt
+```markdown
+# MSR Bug-Fix Analysis Pipeline
 
-# Mine 5 bug-fix commits from Flask (Online Mode)
-python src/collect_multiple_repos.py --repos flask --max-commits 5
-python src/extract_bugfix_commits.py
-python src/compute_complexity.py --mode online
-python src/visualization.py
+Your software's commit history contains valuable information, but extracting it can take a lot of time. This pipeline is an automated tool that extracts bug-fix commits from open-source Python projects and analyzes their code complexity.
 
-# Verified results will be available in data/ and plots/
-Comprehensive InstallationPrerequisitesPython 3.8 or higherGitBashgit clone https://github.com/yourusername/msr-pipeline.git
-cd msr-pipeline
-pip install -r requirements.txt
-Note: The environment requires pandas, pydriller, radon, requests, matplotlib, and seaborn.Full Execution InstructionsOption A: Pure Remote / Online ModeIdeal when you want to avoid cloning repositories locally and stream everything directly from GitHub.Bash# Step 1: Mine metadata using full remote URLs
-python src/collect_multiple_repos.py --repos https://github.com/pallets/flask https://github.com/ishepard/pydriller
+##  Highlights
 
-# Step 2: Filter bugfixes and clean text strings
-python src/extract_bugfix_commits.py
-python src/extract_clean_comments.py
+Here are the main benefits of using this tool:
+*   **Smart filtering:** Automatically finds real bug fixes and ignores irrelevant changes.
+*   **Measures code complexity:** Calculates how complex the modified code is using AST rules.
+*   **Two ways to run:** Works directly online using GitHub URLs or locally on your computer.
+*   **Ready-to-use data:** Outputs clean, merged CSV files and helpful charts to show your results.
 
-# Step 3: Extract churn and calculate AST metrics via remote streaming
-python src/debug_lines_added_deleted.py --mode online
-python src/merge_bugfix_data.py
-python src/compute_complexity.py --mode online
+##  Overview
 
-# Step 4: Final Consolidation & Analytics
-python src/merge_pipeline_data.py
-python src/eda_analysis.py
-python src/visualization.py
-Option B: Local / Offline ModeIdeal when repositories are already cloned on your machine for ultra-fast local processing.Bash# Pre-requisite: Ensure your repositories are downloaded in a directory (e.g., F:/repos/)
-# Step 1: Mine using short names
-python src/collect_multiple_repos.py --repos flask pydriller
+Finding bug fixes in large projects and understanding how hard they were to resolve is usually a manual and slow process. This tool solves that problem by automating the workflow. 
 
-# Step 2: Filter bugfixes and clean text strings
-python src/extract_bugfix_commits.py
-python src/extract_clean_comments.py
+### Key Features
+*   **Smart Bug-Fix Detection:** The tool looks for specific words (like "fix" or "bug") to find the right commits and ignores false matches (like updating the README). This ensures you only get data about real software bugs.
+*   **Two Ways to Run:** You can run the tool locally on downloaded repositories or online using direct GitHub links.
+*   **Code Complexity Check:** It uses the `radon` library to check Python files and calculates the average complexity, the maximum complexity, and the number of highly complex functions (CC > 5) changed during the fix.
 
-# Step 3: Run local tree walks and extract churn from local paths
-python src/debug_lines_added_deleted.py --mode local --repo-dir "F:/repos/"
-python src/merge_bugfix_data.py
-python src/compute_complexity.py --mode local --repo-dir "F:/repos/"
+###  Current Limitations
+While this tool is powerful, there are a few things to keep in mind:
+*   **Python Only:** Currently, the pipeline only analyzes Python files (`.py`).
+*   **Commit Classification:** It uses text patterns to find fixes, which means it might miss bug fixes if developers do not follow common commit message rules.
+*   **Online Mode:** This mode requires internet access and might run slower when processing very large repositories.
 
-# Step 4: Final Consolidation & Analytics
-python src/merge_pipeline_data.py
-python src/eda_analysis.py
-python src/visualization.py
-Contributions & FeedbackWe welcome contributions, academic critiques, and feature requests! If you have suggestions or want to adapt this pipeline for another framework, please feel free to point your ideas over to the Discussions tab or open a technical Issue.
+### How It Works
+
+```text
+┌─────────────────────────────────────────────────────────────────────┐
+│                       PHASE 1: DATA COLLECTION                      │
+│  ┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐ │
+│  │       Get        │   │       Find       │   │      Clean       │ │
+│  │     Commits      │─▶ │    Bug Fixes     │─▶ │     the Data     │ │
+│  │   (PyDriller)    │   │   (Text Rules)   │   │                  │ │
+│  └──────────────────┘   └──────────────────┘   └──────────────────┘ │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                      PHASE 2: CALCULATING DATA                      │
+│  ┌──────────────────┐   ┌──────────────────┐                        │
+│  │      Count       │   │     Measure      │   ┌──────────────────┐ │
+│  │  Changed Lines   │─▶ │ Code Complexity  │─▶ │     Combine      │ │
+│  │ (Added/Deleted)  │   │     (Radon)      │   │    the Data      │ │
+│  └──────────────────┘   └──────────────────┘   └──────────────────┘ │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                  PHASE 3: CHARTS & VISUALIZATION                    │
+│                         ┌──────────────────┐                        │
+│                         │   Create Charts  │                        │
+│                         │   (Matplotlib &  │                        │
+│                         │     Seaborn)     │                        │
+│                         └──────────────────┘                        │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+##  Usage Instructions
+
+The easiest way to use this software is through the main pipeline runner.
+
+### Online Mode (Using GitHub URLs)
+You can use the tool directly on online repositories in two simple steps:
+
+First, collect the raw commits by providing the GitHub links. You can also set a maximum number of commits to process:
+```bash
+python src/collect_multiple_repos.py --repos [https://github.com/psf/requests.git](https://github.com/psf/requests.git) [https://github.com/pallets/flask.git](https://github.com/pallets/flask.git) --max-commits 100
+```
+
+Next, run the main pipeline. The tool will automatically download the necessary files from GitHub to calculate the complexity metrics:
+```bash
+python run_pipeline.py --mode online
+```
+
+### Local Mode (Using downloaded folders)
+If you already have the projects cloned on your computer, you can run everything in one step. Just point the tool to your main folder:
+```bash
+python run_pipeline.py --mode local --repo-dir "F:/repos/"
+```
+
+##  Output Files
+
+When the pipeline finishes, it saves several CSV files and charts in the `data/` and `plots/` folders:
+
+| File Name | Description |
+| :--- | :--- |
+| `multi_repo_commits.csv` | All the raw commits found in the repositories. |
+| `bugfix_commits.csv` | A filtered list containing only bug-fix commits. |
+| `bugfix_with_lines.csv` | Bug fixes with information about added and deleted lines. |
+| `bugfix_complexity.csv` | Code complexity numbers for the Python files. |
+| `final_enriched_bugfixes.csv` | The final file that contains all the merged data. |
+
+##  What Can You Learn From the Data?
+
+This pipeline helps you answer practical questions like:
+*   **Which bug fixes are the most complex?** Look at the `max_complexity` and `high_complexity_functions_count` columns to find the hardest tasks.
+*   **Do bug fixes usually change many files?** Check the `files_changed_count` column to see typical maintenance patterns.
+*   **Is there a correlation between code churn and complexity?** The tool automatically generates correlation plots to show if changing more lines means dealing with harder code.
+*   **Which project has the most complex bug fixes?** Use the repository comparison chart to evaluate different open-source projects.
+
+## 🔍 Example Data
+
+Here is a real example of the data this tool produces. It comes from the PyDriller project (Commit: `d9ac435542e884c...`). It shows how the tool successfully captures all the important details of a bug fix:
+
+```json
+{
+    "repo_name": "pydriller",
+    "commit_hash": "d9ac435542e884c4e2035c384fbf4a00cc28be89",
+    "message": "- fixed bug for the parameter 'single': in case the commit was not present...",
+    "author": "ishepard",
+    "files_changed_count": 5,
+    "python_files_count": 5,
+    "lines_added": 33,
+    "lines_deleted": 4,
+    "avg_complexity": 3.80,
+    "max_complexity": 18.0,
+    "high_complexity_functions_count": 18
+}
+```
+
+> **Note:** This specific bug fix changed 18 highly complex functions, and the maximum complexity reached 18.0. This is very useful information to see which bug fixes are the hardest to manage.
+
+##  Visual Insights
+
+The pipeline automatically generates charts in the `plots/` folder so you can understand the data visually. For example, here is how the tool visualizes the relationship between the size of a bug fix (Code Churn) and how complicated the code is (Maximum Complexity): 
+
+*(Add your image link here in your README)*
+
+---
+
+##  Prerequisites
+
+Before you start, make sure you have:
+*   Python 3.8 or higher installed on your system
+*   Git (only needed for local mode)
+*   Internet connection (only needed for online mode)
+*   Basic familiarity with the command line or terminal
+
+##  Installation Instructions
+
+To set the project up, open your terminal and follow these steps:
+
+Clone the repository to your computer:
+```bash
+git clone [https://github.com/your-username/msr-bugfix-pipeline.git](https://github.com/your-username/msr-bugfix-pipeline.git)
+cd msr-bugfix-pipeline
+```
+
+Create and activate a virtual environment (highly recommended):
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+```
+
+Install the required packages:
+```bash
+pip install pandas pydriller requests radon GitPython matplotlib seaborn pytest
+```
+
+##  Testing
+
+This project includes automated tests to check if the main parts are working correctly. After installing, you can run:
+
+```bash
+# Run all tests
+pytest tests/
+```
+
+What the tests check:
+```text
+ test_bugfix_detection: Makes sure the tool finds real bugs and ignores typo fixes.
+ test_complexity: Checks if the code reading and complexity math are correct.
+ test_files: Ensures the tool only looks at Python files and ignores others (like .md or .js).
+```
+
+##  Feedback & Contributing
+
+If you find this tool helpful, or if you have suggestions to make it better, please start a **Discussion** or open an **Issue**!
+
+When building open-source software, building a community is important. If you find a bug, want to add a new feature, or just want to improve the documentation, feel free to submit a **Pull Request**. All contributions are welcome.
+
+```
