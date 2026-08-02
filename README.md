@@ -1,9 +1,8 @@
-```markdown
 # MSR Bug-Fix Analysis Pipeline
 
 Your software's commit history contains valuable information, but extracting it can take a lot of time. This pipeline is an automated tool that extracts bug-fix commits from open-source Python projects and analyzes their code complexity.
 
-##  Highlights
+## Highlights
 
 Here are the main benefits of using this tool:
 *   **Smart filtering:** Automatically finds real bug fixes and ignores irrelevant changes.
@@ -11,7 +10,7 @@ Here are the main benefits of using this tool:
 *   **Two ways to run:** Works directly online using GitHub URLs or locally on your computer.
 *   **Ready-to-use data:** Outputs clean, merged CSV files and helpful charts to show your results.
 
-##  Overview
+## Overview
 
 Finding bug fixes in large projects and understanding how hard they were to resolve is usually a manual and slow process. This tool solves that problem by automating the workflow. 
 
@@ -20,7 +19,7 @@ Finding bug fixes in large projects and understanding how hard they were to reso
 *   **Two Ways to Run:** You can run the tool locally on downloaded repositories or online using direct GitHub links.
 *   **Code Complexity Check:** It uses the `radon` library to check Python files and calculates the average complexity, the maximum complexity, and the number of highly complex functions (CC > 5) changed during the fix.
 
-###  Current Limitations
+### Current Limitations
 While this tool is powerful, there are a few things to keep in mind:
 *   **Python Only:** Currently, the pipeline only analyzes Python files (`.py`).
 *   **Commit Classification:** It uses text patterns to find fixes, which means it might miss bug fixes if developers do not follow common commit message rules.
@@ -30,11 +29,11 @@ While this tool is powerful, there are a few things to keep in mind:
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────┐
-│                       PHASE 1: DATA COLLECTION                      │
+│                        PHASE 1: DATA COLLECTION                     │
 │  ┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐ │
-│  │       Get        │   │       Find       │   │      Clean       │ │
-│  │     Commits      │─▶ │    Bug Fixes     │─▶ │     the Data     │ │
-│  │   (PyDriller)    │   │   (Text Rules)   │   │                  │ │
+│  │        Get       │   │        Find      │   │       Clean      │ │
+│  │      Commits     │─▶ │      Bug Fixes   │─▶ │      the Data    │ │
+│  │    (PyDriller)   │   │    (Text Rules)  │   │                  │ │
 │  └──────────────────┘   └──────────────────┘   └──────────────────┘ │
 └─────────────────────────────────────────────────────────────────────┘
                                   │
@@ -42,9 +41,9 @@ While this tool is powerful, there are a few things to keep in mind:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      PHASE 2: CALCULATING DATA                      │
 │  ┌──────────────────┐   ┌──────────────────┐                        │
-│  │      Count       │   │     Measure      │   ┌──────────────────┐ │
-│  │  Changed Lines   │─▶ │ Code Complexity  │─▶ │     Combine      │ │
-│  │ (Added/Deleted)  │   │     (Radon)      │   │    the Data      │ │
+│  │       Count      │   │      Measure     │   ┌──────────────────┐ │
+│  │   Changed Lines  │─▶ │  Code Complexity │─▶ │      Combine     │ │
+│  │  (Added/Deleted) │   │      (Radon)     │   │     the Data     │ │
 │  └──────────────────┘   └──────────────────┘   └──────────────────┘ │
 └─────────────────────────────────────────────────────────────────────┘
                                   │
@@ -52,14 +51,14 @@ While this tool is powerful, there are a few things to keep in mind:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                  PHASE 3: CHARTS & VISUALIZATION                    │
 │                         ┌──────────────────┐                        │
-│                         │   Create Charts  │                        │
-│                         │   (Matplotlib &  │                        │
-│                         │     Seaborn)     │                        │
+│                         │    Create Charts │                        │
+│                         │    (Matplotlib & │                        │
+│                         │      Seaborn)    │                        │
 │                         └──────────────────┘                        │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-##  Usage Instructions
+## Usage Instructions
 
 The easiest way to use this software is through the main pipeline runner.
 
@@ -82,7 +81,7 @@ If you already have the projects cloned on your computer, you can run everything
 python run_pipeline.py --mode local --repo-dir "F:/repos/"
 ```
 
-##  Output Files
+## Output Files
 
 When the pipeline finishes, it saves several CSV files and charts in the `data/` and `plots/` folders:
 
@@ -94,7 +93,7 @@ When the pipeline finishes, it saves several CSV files and charts in the `data/`
 | `bugfix_complexity.csv` | Code complexity numbers for the Python files. |
 | `final_enriched_bugfixes.csv` | The final file that contains all the merged data. |
 
-##  What Can You Learn From the Data?
+## What Can You Learn From the Data?
 
 This pipeline helps you answer practical questions like:
 *   **Which bug fixes are the most complex?** Look at the `max_complexity` and `high_complexity_functions_count` columns to find the hardest tasks.
@@ -140,7 +139,7 @@ the complexity of bug-fix commits tends to rise.*
 
 ---
 
-##  Prerequisites
+## Prerequisites
 
 Before you start, make sure you have:
 *   Python 3.8 or higher installed on your system
@@ -148,7 +147,7 @@ Before you start, make sure you have:
 *   Internet connection (only needed for online mode)
 *   Basic familiarity with the command line or terminal
 
-##  Installation Instructions
+## Installation Instructions
 
 To set the project up, open your terminal and follow these steps:
 
@@ -168,7 +167,7 @@ Install the required packages:
 pip install pandas pydriller requests radon GitPython matplotlib seaborn pytest
 ```
 
-##  Testing
+## Testing
 
 This project includes automated tests to check if the main parts are working correctly. After installing, you can run:
 
@@ -184,10 +183,8 @@ What the tests check:
  test_files: Ensures the tool only looks at Python files and ignores others (like .md or .js).
 ```
 
-##  Feedback & Contributing
+## Feedback & Contributing
 
 If you find this tool helpful, or if you have suggestions to make it better, please start a **Discussion** or open an **Issue**!
 
 When building open-source software, building a community is important. If you find a bug, want to add a new feature, or just want to improve the documentation, feel free to submit a **Pull Request**. All contributions are welcome.
-
-```
