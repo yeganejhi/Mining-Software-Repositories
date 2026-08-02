@@ -124,11 +124,19 @@ Here is a real example of the data this tool produces. It comes from the PyDrill
 
 > **Note:** This specific bug fix changed 18 highly complex functions, and the maximum complexity reached 18.0. This is very useful information to see which bug fixes are the hardest to manage.
 
-##  Visual Insights
+## Visual Insights
 
-The pipeline automatically generates charts in the `plots/` folder so you can understand the data visually. For example, here is how the tool visualizes the relationship between the size of a bug fix (Code Churn) and how complicated the code is (Maximum Complexity): 
+The pipeline automatically generates charts in the `plots/` folder. 
+Here is the most important visualization showing the relationship between 
+code churn and complexity:
 
-*(Add your image link here in your README)*
+![Churn vs Complexity](plots/churn_vs_complexity.png)
+
+*This scatter plot shows that as the number of lines changed increases, 
+the complexity of bug-fix commits tends to rise.*
+
+>  **All visualizations** including complexity distribution, repository comparison, 
+> and top complex commits are automatically saved in the [`plots/`](plots/) folder.
 
 ---
 
