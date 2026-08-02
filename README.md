@@ -154,8 +154,7 @@ To set the project up, open your terminal and follow these steps:
 
 Clone the repository to your computer:
 ```bash
-git clone [https://github.com/your-username/msr-bugfix-pipeline.git](https://github.com/your-username/msr-bugfix-pipeline.git)
-cd msr-bugfix-pipeline
+git clone [https://github.com/yeganejhi/Mining-Sreach-Repositories](https://github.com/yeganejhi/Mining-Sreach-Repositories)
 ```
 
 Create and activate a virtual environment (highly recommended):
