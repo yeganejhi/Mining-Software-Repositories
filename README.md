@@ -5,7 +5,7 @@ Your software's commit history contains valuable information, but extracting it 
 ## Highlights
 
 Here are the main benefits of using this tool:
-*   **Smart filtering:** Automatically finds real bug fixes and ignores irrelevant changes.
+*   **Bug-fix filtering:** Identifies likely bug-fix commits based on commit-message patterns and filters out common irrelevant matcheس.
 *   **Measures code complexity:** Calculates how complex the modified code is using AST rules.
 *   **Two ways to run:** Works directly online using GitHub URLs or locally on your computer.
 *   **Ready-to-use data:** Outputs clean, merged CSV files and helpful charts to show your results.
@@ -15,9 +15,9 @@ Here are the main benefits of using this tool:
 Finding bug fixes in large projects and understanding how hard they were to resolve is usually a manual and slow process. This tool solves that problem by automating the workflow. 
 
 ### Key Features
-*   **Smart Bug-Fix Detection:** The tool looks for specific words (like "fix" or "bug") to find the right commits and ignores false matches (like updating the README). This ensures you only get data about real software bugs.
+*   **Smart Bug-Fix Detection:** The tool looks for specific words (like "fix" or "bug") to find the right commits and ignores false matches (like updating the README). This helps identify likely bug-fix commits while reducing false positives.
 *   **Two Ways to Run:** You can run the tool locally on downloaded repositories or online using direct GitHub links.
-*   **Code Complexity Check:** It uses the `radon` library to check Python files and calculates the average complexity, the maximum complexity, and the number of highly complex functions (CC > 5) changed during the fix.
+*   **Code Complexity Check:** It uses the `radon` library to check Python files and calculates the average complexity, the maximum complexity, The pipeline uses CC > 5 as a project-defined threshold for identifying highly complex functions.
 
 ### Current Limitations
 While this tool is powerful, there are a few things to keep in mind:
@@ -67,7 +67,7 @@ You can use the tool directly on online repositories in two simple steps:
 
 First, collect the raw commits by providing the GitHub links. You can also set a maximum number of commits to process:
 ```bash
-python src/collect_multiple_repos.py --repos [https://github.com/psf/requests.git](https://github.com/psf/requests.git) [https://github.com/pallets/flask.git](https://github.com/pallets/flask.git) --max-commits 100
+python src/collect_multiple_repos.py --repos https://github.com/psf/requests.git https://github.com/pallets/flask.git --max-commits 100
 ```
 
 Next, run the main pipeline. The tool will automatically download the necessary files from GitHub to calculate the complexity metrics:
@@ -153,7 +153,7 @@ To set the project up, open your terminal and follow these steps:
 
 Clone the repository to your computer:
 ```bash
-git clone [https://github.com/yeganejhi/Mining-Sreach-Repositories](https://github.com/yeganejhi/Mining-Sreach-Repositories)
+git clone https://github.com/yeganejhi/Mining-Software-Repositories
 ```
 
 Create and activate a virtual environment (highly recommended):
@@ -178,7 +178,7 @@ pytest tests/
 
 What the tests check:
 ```text
- test_bugfix_detection: Makes sure the tool finds real bugs and ignores typo fixes.
+ test_bugfix_detection: Verifies that bug-fix commit messages are correctly classified according to the configured patterns.
  test_complexity: Checks if the code reading and complexity math are correct.
  test_files: Ensures the tool only looks at Python files and ignores others (like .md or .js).
 ```
